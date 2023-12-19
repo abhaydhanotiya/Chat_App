@@ -1,3 +1,4 @@
+import 'package:chat/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +8,9 @@ import 'chat_list.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -17,11 +20,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Firebase Chat',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-        // colorScheme:
-        //     ColorScheme.dark(background: Color.fromRGBO(35, 34, 51, 1)),
-      ),
       home: AuthenticationScreen(),
     );
   }

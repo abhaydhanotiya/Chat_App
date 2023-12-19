@@ -72,7 +72,7 @@ class ChatList extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => ChatScreen(
                           userId: currentUserId,
-                          userName: 'Current User',
+                          userName: 'You',
                           receiverId: userId,
                           receiverName: userName,
                         ),

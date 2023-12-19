@@ -1,3 +1,4 @@
+import 'package:chat/verify.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -105,37 +106,24 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.abc,
-                    color: Colors.white,
-                  ),
-                  SizedBox(width: size.width * 0.05),
-                  Text(
-                    'My Chat',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+              Text(
+                'SignUp',
+                style: TextStyle(color: Colors.white),
               ),
               SizedBox(height: size.height * 0.05),
               TextField(
                 controller: nameController,
                 decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.person, color: Colors.white),
-                    hintText: 'Name',
-                    hintStyle: TextStyle(color: Colors.white),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
+                  prefixIcon: Icon(Icons.person, color: Colors.white),
+                  hintText: 'Name',
+                  hintStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    borderSide: BorderSide(
+                      color: Colors.white,
                     ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    )),
+                  ),
+                ),
                 cursorColor: Colors.black,
                 style:
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
@@ -150,12 +138,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
                     ),
                     hintText: 'Email',
                     hintStyle: TextStyle(color: Colors.white),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    border: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                         color: Colors.white,
                       ),
@@ -167,6 +151,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
               SizedBox(height: size.height * 0.02),
               TextField(
                 controller: passwordController,
+                obscureText: true,
                 decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.password,
@@ -174,12 +159,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
                     ),
                     hintText: 'Password',
                     hintStyle: TextStyle(color: Colors.white),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    border: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                       borderSide: BorderSide(
                         color: Colors.white,
                       ),
@@ -223,101 +204,55 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
                     }
                   },
                   child: Container(
+                      width: 150,
                       child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        child: Text('Sign Up'),
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        child: Center(
+                            child: Text('Sign Up',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ))),
                       ),
                       decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(25)))),
                 ),
               ),
+              SizedBox(height: size.height * 0.05),
+              //already have an account
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Already have an account?",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VerifyLogin(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      " Sign In",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),
       ),
     );
-
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text('Login Page'),
-    //     bottom: TabBar(
-    //       controller: _tabController,
-    //       tabs: [
-    //         Tab(text: 'Create Account'),
-    //         Tab(text: 'Login'),
-    //       ],
-    //     ),
-    //   ),
-    //   body: TabBarView(
-    //     controller: _tabController,
-    //     children: [
-    //       Center(
-    //         child: Padding(
-    //           padding: const EdgeInsets.all(8.0),
-    //           child: Column(
-    //             children: [
-    //               TextField(
-    //                 controller: nameController,
-    //                 decoration: InputDecoration(labelText: 'Name'),
-    //               ),
-    //               TextField(
-    //                 controller: emailController,
-    //                 decoration: InputDecoration(labelText: 'Email'),
-    //               ),
-    //               TextField(
-    //                 controller: passwordController,
-    //                 decoration: InputDecoration(labelText: 'Password'),
-    //                 obscureText: true,
-    //               ),
-    //               ElevatedButton(
-    //                 onPressed: () {
-    //                   // Call create account function
-    //                   _createAccount(
-    //                     context,
-    //                     nameController.text,
-    //                     emailController.text,
-    //                     passwordController.text,
-    //                   );
-    //                 },
-    //                 child: Text('Create Account'),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //       Center(
-    //         child: Padding(
-    //           padding: const EdgeInsets.all(8.0),
-    //           child: Column(
-    //             children: [
-    //               TextField(
-    //                 controller: emailController,
-    //                 decoration: InputDecoration(labelText: 'Email'),
-    //               ),
-    //               TextField(
-    //                 controller: passwordController,
-    //                 decoration: InputDecoration(labelText: 'Password'),
-    //                 obscureText: true,
-    //               ),
-    //               ElevatedButton(
-    //                 onPressed: () {
-    //                   // Call login function
-    //                   _login(
-    //                     context,
-    //                     emailController.text,
-    //                     passwordController.text,
-    //                   );
-    //                 },
-    //                 child: Text('Login'),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }
