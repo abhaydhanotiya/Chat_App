@@ -27,7 +27,7 @@ A simple one-to-one chat application built with Flutter and Firestore, allowing 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/flutter-chat-app.git
+    git clone https://github.com/abhaydhanotiya/Chat_App.git
     ```
 
 2. Navigate to the project directory:
